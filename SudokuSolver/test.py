@@ -28,10 +28,33 @@ def eliminate(values: Dict) -> Dict:
     return values
 
 
+def only_choice(values):
+    for unit in unitlist:
+        dictCount: Dict[str, int] = {}
+        for box in unit:
+            for val in values[box]:
+                if val not in dictCount:
+                    dictCount[val] = 1
+                else:
+                    dictCount[val] = dictCount[val] + 1
+
+        mySet = set()
+        for key, value in dictCount.items():
+            if value == 1:
+                mySet.add(key)
+        for box in unit:
+            for val in values[box]:
+                if val in mySet:
+                    values[box] = val
+                    break
+    return values
+
+
 def main():
     print("Hello World!")
     dictBoxes: dict = grid_values('..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..')
     dictBoxes = eliminate(dictBoxes)
+    dictBoxes = only_choice(dictBoxes)
     display(dictBoxes)
 
 
