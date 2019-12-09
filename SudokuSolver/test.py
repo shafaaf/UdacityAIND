@@ -53,8 +53,8 @@ def only_choice(values):
 
 
 def main():
+    # Trying out individual techniques
     print("Sudoku solver!")
-
     dictBoxes: dict = grid_values('..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..')
     print("\n\n===initial dictBoxes with possible values===\n")
     display(dictBoxes)
@@ -67,6 +67,17 @@ def main():
     print("\n\n===dictBoxes after only_choice()===\n")
     display(dictBoxes)
 
+# ----------------------------------------------------------------------------
+
+    # Trying out all techniques together to solve sudoku puzzle
+    dictBoxes2: dict = grid_values('..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..')
+    print("\n\n===initial dictBoxes2 with possible values===\n")
+    display(dictBoxes2)
+
+    reducedDictBoxes = reduce_puzzle(dictBoxes2)
+    print("\n\n===reducedDictBoxes after reduce_puzzle()===\n")
+    display(reducedDictBoxes)
+
 
 def reduce_puzzle(values):
     stalled = False
@@ -75,13 +86,17 @@ def reduce_puzzle(values):
         solved_values_before = len([box for box in values.keys() if len(values[box]) == 1])
 
         # Your code here: Use the Eliminate Strategy
+        values = eliminate(values)
 
         # Your code here: Use the Only Choice Strategy
+        values = only_choice(values)
 
         # Check how many boxes have a determined value, to compare
         solved_values_after = len([box for box in values.keys() if len(values[box]) == 1])
+
         # If no new values were added, stop the loop.
         stalled = solved_values_before == solved_values_after
+
         # Sanity check, return False if there is a box with zero available values:
         if len([box for box in values.keys() if len(values[box]) == 0]):
             return False
