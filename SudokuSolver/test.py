@@ -52,9 +52,8 @@ def only_choice(values):
     return values
 
 
-def main():
-    # Trying out individual techniques
-    print("Sudoku solver!")
+def individualTechniques():
+    print("individualTechniques!")
     dictBoxes: dict = grid_values('..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..')
     print("\n\n===initial dictBoxes with possible values===\n")
     display(dictBoxes)
@@ -67,16 +66,33 @@ def main():
     print("\n\n===dictBoxes after only_choice()===\n")
     display(dictBoxes)
 
-# ----------------------------------------------------------------------------
 
-    # Trying out all techniques together to solve sudoku puzzle
-    dictBoxes2: dict = grid_values('..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..')
-    print("\n\n===initial dictBoxes2 with possible values===\n")
-    display(dictBoxes2)
+def eliminationAndOnlyChoiceTogether():
+    print("eliminationAndOnlyChoiceTogether")
+    dictBoxes: dict = grid_values('..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..')
+    print("\n\n===initial dictBoxes with possible values===\n")
+    display(dictBoxes)
 
-    reducedDictBoxes = reduce_puzzle(dictBoxes2)
+    reducedDictBoxes = reduce_puzzle(dictBoxes)
     print("\n\n===reducedDictBoxes after reduce_puzzle()===\n")
     display(reducedDictBoxes)
+
+
+def eliminationAndOnlyChoiceTogetherHardPuzzle():
+    hardGrid = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+    dictBoxes: dict = grid_values(hardGrid)
+    print("\n\n===initial dictBoxes with possible values===\n")
+    display(dictBoxes)
+
+    reducedDictBoxes = reduce_puzzle(dictBoxes)
+    print("\n\n===reducedDictBoxes after reduce_puzzle()===\n")
+    display(reducedDictBoxes)
+
+
+def main():
+    #individualTechniques()
+    #eliminationAndOnlyChoiceTogether()
+    eliminationAndOnlyChoiceTogetherHardPuzzle()
 
 
 def reduce_puzzle(values):
