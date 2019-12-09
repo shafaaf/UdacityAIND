@@ -1,6 +1,6 @@
 from typing import Dict, List, Any, Set
 
-from techniques import grid_values, eliminate, only_choice, reduce_puzzle
+from techniques import grid_values, eliminate, only_choice, reduce_puzzle, search
 from utils import *
 
 
@@ -43,16 +43,20 @@ def eliminationAndOnlyChoiceTogetherHardPuzzle():
 
 def searchWithHardPuzzle():
     hardGrid = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-    dictBoxes: dict = grid_values(hardGrid)
+    values: dict = grid_values(hardGrid)
     print("\n\n===initial dictBoxes with possible values===\n")
-    display(dictBoxes)
+    display(values)
+
+    attempt = search(values)
+    print("\n\n===Final solution===\n")
+    display(attempt)
 
 
 def main():
-    individualTechniques()
-    eliminationAndOnlyChoiceTogether()
-    eliminationAndOnlyChoiceTogetherHardPuzzle()
-    #searchWithHardPuzzle()
+    #individualTechniques()
+    #eliminationAndOnlyChoiceTogether()
+    #eliminationAndOnlyChoiceTogetherHardPuzzle()
+    searchWithHardPuzzle()
 
 
 # boxes = ['A1', 'A2', ..., 'I9']
